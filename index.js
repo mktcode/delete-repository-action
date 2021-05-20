@@ -1,18 +1,20 @@
 const core = require('@actions/core');
-const wait = require('./wait');
+const axios = require('axios');
 
-
-// most @actions toolkit packages have async methods
 async function run() {
   try {
-    const ms = core.getInput('milliseconds');
-    core.info(`Waiting ${ms} milliseconds ...`);
+    const name = core.getInput('name');
+    const accessToken = core.getInput('access-token');
 
-    core.debug((new Date()).toTimeString()); // debug is only output if you set the secret `ACTIONS_RUNNER_DEBUG` to true
-    await wait(parseInt(ms));
-    core.info((new Date()).toTimeString());
-
-    core.setOutput('time', new Date().toTimeString());
+    await axios.delete(
+      'https://api.github.com/repos/' + name,
+      {
+        headers: {
+          Authorization: 'token ' + accessToken
+        }
+      }
+    )
+    core.info('Repository deleted.');
   } catch (error) {
     core.setFailed(error.message);
   }

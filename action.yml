@@ -1,13 +1,12 @@
-name: 'Wait'
-description: 'Wait a designated number of milliseconds'
+name: 'Delete Repository'
+description: 'Delete a repository from your workflows.'
 inputs:
-  milliseconds:  # id of input
-    description: 'number of milliseconds to wait'
+  name:
+    description: 'name of repository to delete'
     required: true
-    default: '1000'
-outputs:
-  time: # output will be available to future steps
-    description: 'The message to output'
+  access-token:
+    description: 'access token with repo scope'
+    required: true
 runs:
   using: 'node12'
   main: 'dist/index.js'
