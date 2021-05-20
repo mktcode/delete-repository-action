@@ -9,6 +9,6 @@ Octobay uses this action as part of its CI/CD pipline to delete temporary reposi
 ```yaml
 uses: octobay/delete-repository-action@v1
 with:
-  name: 'repository-name'
+  name: 'owner/repository'
   access-token: 'accessTokenWithRepoScope'
 ```
